@@ -1,0 +1,27 @@
+# Planning template only. UNSET is never a permission.
+# Copy this to the target project; replace values with verified evidence.
+security_contract:
+  purpose: UNSET
+  approved_tools: []              # name, input/output schema, read/write effects
+  mcp_protocol_revision: UNSET
+  sdk_package: UNSET
+  sdk_exact_version: UNSET
+  runtime_exact_version: UNSET
+  dependency_lockfile: UNSET
+  transport: UNSET                # stdio or streamable-http
+  topology: UNSET                 # local/remote; deployment boundary
+  principal_identity_source: UNSET
+  authorization_policy_reference: UNSET
+  tenant_identity_source: UNSET
+  approval_policy_reference: UNSET
+  allowed_filesystem_roots: []
+  allowed_upstream_hosts: []
+  outbound_network_policy: UNSET
+  data_classification: UNSET
+  external_credential_source: UNSET
+  authoritative_state_owner: UNSET
+  idempotency_and_recovery_policy: UNSET
+  audit_and_retention_policy: UNSET
+  test_environment: UNSET
+  deploy_privilege_boundary: UNSET
+  security_reviewer: UNSET

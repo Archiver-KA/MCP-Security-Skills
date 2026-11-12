@@ -1,0 +1,22 @@
+name: Validate Agent Skill
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  package-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Validate skill metadata and references
+        run: python3 scripts/validate_skill.py
+      - name: Run validator unit tests
+        run: python3 -m unittest discover -s tests -v
