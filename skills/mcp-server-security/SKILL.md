@@ -1,11 +1,12 @@
 ---
 name: mcp-server-security
-description: Securely design, implement, review, and test Model Context Protocol (MCP) servers. Use for stdio or Streamable HTTP MCP servers, OAuth/resource authorization, tool permission audits, tenant isolation, filesystem/network safety, state changes, supply-chain checks, and release readiness.
+description: Security-first Agent Skill for Model Context Protocol (MCP) server security: design, harden, threat-model, audit, and test stdio or Streamable HTTP MCP servers. Use for MCP security checklists, OAuth resource authorization, prompt injection and tool poisoning, SSRF, least privilege, tenant isolation, filesystem safety, and secure release gates.
 license: MIT
 compatibility: Agent Skills-compatible coding agent. No runtime package dependencies; implementation requires project-approved MCP protocol and SDK versions.
 metadata:
   version: "0.1.0"
   status: "community-draft"
+  keywords: "mcp-security, model-context-protocol, agent-skills, threat-modeling, security-audit"
 ---
 
 # MCP Server Security

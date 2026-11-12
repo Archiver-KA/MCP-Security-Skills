@@ -20,3 +20,50 @@ jobs:
         run: python3 scripts/validate_skill.py
       - name: Run validator unit tests
         run: python3 -m unittest discover -s tests -v
+
+  cli-install-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Set up compatible Node.js
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: '22.20.0'
+      - name: Install the checked-out skill via Skills CLI
+        shell: bash
+        env:
+          DISABLE_TELEMETRY: '1'
+        run: |
+          set -euo pipefail
+          target="$(mktemp -d)"
+          cd "$target"
+          npx --yes skills@1.8.1 add "$GITHUB_WORKSPACE" --skill mcp-server-security -a claude-code -y --copy
+          found=0
+          for path in ".agents/skills/mcp-server-security/SKILL.md" ".claude/skills/mcp-server-security/SKILL.md"; do
+            if test -f "$path"; then
+              cmp "$path" "$GITHUB_WORKSPACE/skills/mcp-server-security/SKILL.md"
+              found=1
+            fi
+          done
+          test "$found" -eq 1
+      - name: Verify public GitHub shorthand after publishing
+        if: ${{ github.event.repository.private == false }}
+        shell: bash
+        env:
+          DISABLE_TELEMETRY: '1'
+        run: |
+          set -euo pipefail
+          target="$(mktemp -d)"
+          cd "$target"
+          npx --yes skills@1.8.1 add Archiver-KA/MCP-Security-Skills --skill mcp-server-security -a claude-code -y --copy
+          found=0
+          for path in ".agents/skills/mcp-server-security/SKILL.md" ".claude/skills/mcp-server-security/SKILL.md"; do
+            if test -f "$path"; then
+              cmp "$path" "$GITHUB_WORKSPACE/skills/mcp-server-security/SKILL.md"
+              found=1
+            fi
+          done
+          test "$found" -eq 1

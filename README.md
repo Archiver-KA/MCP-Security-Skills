@@ -1,6 +1,6 @@
-# MCP Security Skills
+# MCP Security Skills — Secure MCP Server Development and Auditing
 
-Security-first Agent Skills for building, reviewing, and operating Model Context Protocol (MCP) servers.
+An open-source, security-first **Agent Skill for Model Context Protocol (MCP) server security**: design, threat-model, harden, review, and test stdio and Streamable HTTP MCP servers.
 
 **Status:** Community draft (v0.1.0). Documentation and agent workflow, **not** an MCP server, security scanner, certification, or substitute for a project-specific security review.
 
@@ -9,6 +9,16 @@ Security-first Agent Skills for building, reviewing, and operating Model Context
 - **Protocols:** Version-aware guidance for MCP `2026-07-28` and earlier handshake-era revisions
 - **Audience:** Coding agents and engineers implementing local (stdio) or remote (Streamable HTTP) MCP servers
 - **Principle:** Deny by default; verify identity and authorization for every effectful call; do not infer permissions from conversation or tool metadata.
+
+## Security coverage
+
+- MCP server authentication and resource-level authorization (OAuth, audience, scopes).
+- Prompt injection, tool poisoning, and confused-deputy threats.
+- SSRF, filesystem traversal, command injection, and network egress restrictions.
+- Least privilege, tenant isolation, secrets, and supply-chain controls.
+- Idempotency, state-transition safety, negative testing, and release gates.
+
+The [skill entry point](skills/mcp-server-security/SKILL.md) and its versioned [security references](skills/mcp-server-security/references/SOURCES.md) provide an auditable, fail-closed implementation workflow. These are agent instructions, not an executable MCP server.
 
 ## Install
 
@@ -98,6 +108,10 @@ These checks validate packaging and documentation references only. They do **not
 - [skills CLI](https://github.com/vercel-labs/skills)
 
 See [SOURCES.md](skills/mcp-server-security/references/SOURCES.md) for the versioned source list and update policy.
+
+## Discoverability and social preview
+
+For GitHub About description, topic tags, CLI verification, and the official social-preview upload procedure, see [DISCOVERY.md](docs/DISCOVERY.md). GitHub repository About fields and the preview image require repository Settings access; files in this repository do not set those properties automatically.
 
 ## Contributing and security reports
 
