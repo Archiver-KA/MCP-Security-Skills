@@ -27,13 +27,22 @@ claude-code
 codex
 ```
 
-The About metadata is currently not managed by a repository file. To apply it, open GitHub -> repository -> **About** (gear icon) and enter the description/topics. Set the homepage **only after** a documentation website exists; do not invent a URL.
+## Approved website and social profiles
+
+- Project website / GitHub homepage: **https://sinera.io/**
+- Project X: **https://x.com/sinera_labs**
+- Personal X: **https://x.com/archivist336**
+
+Only the project website belongs in the GitHub About **Website** field. GitHub About has no dedicated fields for both X accounts; distinguish them in the [README](../README.md).
+
+GitHub About properties are hosted settings; editing repository files does not change them. To apply these, use **About** (gear icon) or an authenticated GitHub CLI.
 
 Alternatively, from a machine with an authenticated `gh` CLI and explicit maintainer approval:
 
 ```bash
 gh repo edit Archiver-KA/MCP-Security-Skills \
-  --description "Security-first Agent Skill for MCP servers: OAuth, prompt injection, SSRF, least privilege, tenant isolation, threat modeling and testing."
+  --description "Security-first Agent Skill for MCP servers: OAuth, prompt injection, SSRF, least privilege, tenant isolation, threat modeling and testing." \
+  --homepage "https://sinera.io/"
 
 # CAUTION: The PUT below REPLACES all existing topics. Review the current set first.
 gh api repos/Archiver-KA/MCP-Security-Skills/topics --jq '.names'
@@ -53,6 +62,20 @@ gh api --method PUT repos/Archiver-KA/MCP-Security-Skills/topics \
 ```
 
 Never paste a token into the README, a shell command, or CI logs.
+
+## Publishing safely
+
+Before switching to Public, inspect the full Git commit history (including author email metadata), Actions logs and artifacts, and any release or branch not represented by a current-file scan. The previously completed basic pattern scan found no matches in 17 current tracked text files, but does not certify that the repo contains no secrets.
+
+A repository administrator can change visibility in GitHub **Settings -> General -> Danger Zone -> Change repository visibility -> Public**. With an authenticated GitHub CLI, use:
+
+```bash
+gh repo view Archiver-KA/MCP-Security-Skills --json visibility,description,homepageUrl,repositoryTopics
+gh repo edit Archiver-KA/MCP-Security-Skills --visibility public --accept-visibility-change-consequences
+gh repo view Archiver-KA/MCP-Security-Skills --json visibility --jq '.visibility'
+```
+
+Publishing exposes code, commit metadata and Actions history; it can affect rulesets and stars. See the [GitHub visibility documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility).
 
 ## Social preview
 

@@ -4,6 +4,15 @@ An open-source, security-first **Agent Skill for Model Context Protocol (MCP) se
 
 **Status:** Community draft (v0.1.0). Documentation and agent workflow, **not** an MCP server, security scanner, certification, or substitute for a project-specific security review.
 
+## Project and community
+
+- **Project website:** [Sinera](https://sinera.io/)
+- **Project X account:** [@sinera_labs](https://x.com/sinera_labs)
+- **Personal X account:** [@archivist336](https://x.com/archivist336)
+
+The project and personal social accounts serve different purposes. These profiles are provided by the repository maintainer; they do not constitute an independent security endorsement.
+
+
 - **License:** MIT
 - **Skill:** `mcp-server-security`
 - **Protocols:** Version-aware guidance for MCP `2026-07-28` and earlier handshake-era revisions
