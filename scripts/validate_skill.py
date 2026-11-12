@@ -42,6 +42,11 @@ def validate_skill(skill_root: Path = SKILL_ROOT) -> list[str]:
         errors.append("Skill name must match mcp-server-security directory")
     if not description or len(description.group(1).strip(" \"'")) not in range(1, 1025):
         errors.append("Missing or oversized description")
+    elif ": " in description.group(1) and not (
+        (description.group(1).startswith('"') and description.group(1).endswith('"'))
+        or (description.group(1).startswith("'") and description.group(1).endswith("'"))
+    ):
+        errors.append("Description with a colon must be quoted as YAML")
     if not license_field or license_field.group(1).strip() != "MIT":
         errors.append("Skill license must be MIT")
 

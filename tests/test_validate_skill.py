@@ -30,6 +30,19 @@ class ValidateSkillTests(unittest.TestCase):
             findings = validate_skill(skill)
             self.assertTrue(any("Missing references/" in f for f in findings))
 
+    def test_unquoted_colon_description_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            skill = Path(tmp) / "mcp-server-security"
+            skill.mkdir()
+            (skill / "SKILL.md").write_text(
+                "---\nname: mcp-server-security\n"
+                "description: Security-first: build MCP servers.\n"
+                "license: MIT\n---\n# MCP Server Security\n",
+                encoding="utf-8",
+            )
+            findings = validate_skill(skill)
+            self.assertTrue(any("must be quoted as YAML" in f for f in findings))
+
 
 if __name__ == "__main__":
     unittest.main()
